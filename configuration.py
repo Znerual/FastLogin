@@ -10,3 +10,13 @@ class Configuration:
         for entry in credentials:
             if (entry.get('name') == user):
                 return entry.find('username').text, entry.find('password').text
+    def getCourseByName(self, name):
+        courseList = self.root.findall('course')
+        for entry in courseList:
+            if (entry.get('name') == name):
+                return int(entry.find('id').text), (entry.find('startDate').text), entry.find('gotPlace').text == 1
+    def getCourseByDate(self, date):
+        courseList = self.root.findall('course')
+        for entry in courseList:
+            if (entry.find('startDate') == date):
+                return int(entry.find('id').text), (entry.find('startDate').text), entry.find('gotPlace').text == 1
