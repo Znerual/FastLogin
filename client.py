@@ -1,11 +1,25 @@
-from configuration import Configuration
+import urllib.request
+import urllib.parse
+with urllib.request.urlopen('https://docs.python.org/2/howto/urllib2.html') as response:
+    the_page = response.read()
+    #print(the_page)
 
-#test the configuration class:
-#login credentials:
-conf = Configuration()
-us, pw = conf.getUsernamePassword('Laurenz')
-
-#course entries:
-print(us + ":" + pw)
-id, date, place = conf.getCourseByName('GDPII')
-print(str(id) + ", " + str(date) + " - " + str(place))
+url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
+values = {'name' : 'matrikelnummer',
+          'pw' : 'passwort',
+          'totp' : '',
+          'app' : '77'}
+header = {
+"Host":"iu.zid.tuwien.ac.at",
+"User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0",
+"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+"Accept-Language":"en-US,en;q=0.5",
+"Accept-Encoding":"gzip, deflate, br",
+"Connection":"keep-alive",
+"Upgrade-Insecure-Requests":"1"
+}
+data = urllib.parse.urlencode(values)
+data = data.encode('UTF-8') # data should be bytes
+req = urllib.request.Request(url, data)
+   the_page = response.read().decode('utf8', 'ignore')
+   print(the_page)
