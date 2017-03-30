@@ -1,12 +1,16 @@
 import urllib.request
 import urllib.parse
+from configuration import Configuration
+
 with urllib.request.urlopen('https://docs.python.org/2/howto/urllib2.html') as response:
     the_page = response.read()
     #print(the_page)
 
 url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
-values = {'name' : 'matrikelnummer',
-          'pw' : 'passwort',
+conf = Configuration()
+pw, usn = conf.getUsernamePassword('Laurenz')
+values = {'name' : usn,
+          'pw' : pw,
           'totp' : '',
           'app' : '77'}
 header = {
