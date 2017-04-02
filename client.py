@@ -2,9 +2,6 @@ import urllib.request
 import urllib.parse
 from configuration import Configuration
 
-
-logIn()
-
 def logIn():
     url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
     conf = Configuration()
@@ -28,8 +25,8 @@ def logIn():
     data = urllib.parse.urlencode(values)
     data = data.encode('UTF-8') # data should be bytes
     req = urllib.request.Request(url, data)
-       the_page = response.read().decode('utf8', 'ignore') #converts the result to utf8 text
-       print(the_page) #we should maybe build an HTML class with functions like getDivs() or get ElementById... to get the values
+    the_page = req.read().decode('utf8', 'ignore') #converts the result to utf8 text
+    print(the_page) #we should maybe build an HTML class with functions like getDivs() or get ElementById... to get the values
    #return the cooky or another way of authorisation
 
 
@@ -37,3 +34,5 @@ def urlibTest():
     with urllib.request.urlopen('https://docs.python.org/2/howto/urllib2.html') as response:
         the_page = response.read()
         print(the_page)
+
+logIn()
