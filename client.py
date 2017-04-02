@@ -1,6 +1,7 @@
 import urllib.request
 import urllib.parse
 import http.cookiejar
+import json
 from requests import requests
 from configuration import Configuration
 
@@ -30,21 +31,27 @@ def logIn():
     data = urllib.parse.urlencode(values)
     data = data.encode('UTF-8')  # data should be bytes
 # ---! urllib attempt, (including Cookiejar) !---
-    cj = http.cookiejar.CookieJar()
-    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
-    request = urllib.request.Request(url, data)
-    response = opener.open(request)
-    response.headers.add_header('Set-Cookie',
-        'Life=ok; expires=Sat, 02-Apr-2017 18:23:03 GMT; path=/; domain=' + header['Host'] +'; HttpOnly')
-    the_page = response.read().decode('utf8', 'ignore') #converts the result to utf8 text
-    cj.extract_cookies(response, request)
-    for cookie in cj:
-        print(cookie)
+   # cj = http.cookiejar.CookieJar()
+#    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    #request = urllib.request.Request(url, data)
+    #response = opener.open(request)
+   # response.headers.add_header('Set-Cookie',
+  #      'Life=ok; expires=Sat, 02-Apr-2017 18:23:03 GMT; path=/; domain=' + header['Host'] +'; HttpOnly')
+   # the_page = response.read().decode('utf8', 'ignore') #converts the result to utf8 text
+  #  cj.extract_cookies(response, request)
+    #for cookie in cj:
+        #print(cookie)
 # ---! requests lib attempt (Libaray in folder requests) !---
 # see http://www.pythonforbeginners.com/requests/using-requests-in-python
 # and better: http://engineering.hackerearth.com/2014/08/21/python-requests-module/
-    r = requests.get(url)
-    print(r.text)
+    with requests.Session() as s:
+        req = requests.Request('POST', url, data=data, headers=header)
+        prepped = s.prepare_request(req)
+        resp = s.send(prepped)
+        print(resp.text)
+    #r = requests.post(url, data=json.dumps(data), headers=header)
+
+
 
 
 
