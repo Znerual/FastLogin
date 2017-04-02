@@ -1,5 +1,6 @@
 import urllib.request
 import urllib.parse
+import http.cookiejar
 from configuration import Configuration
 
 def logIn():
@@ -23,9 +24,15 @@ def logIn():
     "Upgrade-Insecure-Requests":"1"
     }
     data = urllib.parse.urlencode(values)
-    data = data.encode('UTF-8') # data should be bytes
-    req = urllib.request.Request(url, data)
-    the_page = req.read().decode('utf8', 'ignore') #converts the result to utf8 text
+    data = data.encode('UTF-8')  # data should be bytes
+
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    request = urllib.request.Request(url, data)
+    response = opener.open(request)
+    print(cj)
+    print(cj.extract_cookies(response, request))
+    the_page = response.read().decode('utf8', 'ignore') #converts the result to utf8 text
     print(the_page) #we should maybe build an HTML class with functions like getDivs() or get ElementById... to get the values
    #return the cooky or another way of authorisation
 
