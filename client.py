@@ -44,13 +44,17 @@ def logIn():
 # ---! requests lib attempt (Libaray in folder requests) !---
 # see http://www.pythonforbeginners.com/requests/using-requests-in-python
 # and better: http://engineering.hackerearth.com/2014/08/21/python-requests-module/
-    with requests.Session() as s:
-        req = requests.Request('POST', url, data=data, headers=header)
-        prepped = s.prepare_request(req)
-        resp = s.send(prepped)
-        print(resp.text)
+    #with requests.Session() as s:
+     #   req = requests.Request('POST', url, data=data, headers=header)
+     #   prepped = s.prepare_request(req)
+     #   resp = s.send(prepped)
+     #   print(resp.text)
     #r = requests.post(url, data=json.dumps(data), headers=header)
 
+    with requests.Session() as session:
+        session.post(url, data=data)
+        r = session.get("https://iu.zid.tuwien.ac.at/AuthServ.portal")
+        print(r.text)
 
 
 
