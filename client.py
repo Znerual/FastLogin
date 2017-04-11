@@ -9,7 +9,7 @@ def logIn():
 # ---! Data !---
     url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
     conf = Configuration()
-    pw, usn = conf.getUsernamePassword('Laurenz')
+    usn, pw = conf.getUsernamePassword('Laurenz')
     values = {'name' : usn,
               'pw' : pw,
               'totp' : '',
@@ -53,7 +53,7 @@ def logIn():
 
     with requests.Session() as session:
         session.post(url, data=data)
-        r = session.get("https://iu.zid.tuwien.ac.at/AuthServ.portal")
+        r = session.get("https://tiss.tuwien.ac.at/course/educationDetails.xhtml?dswid=8816&dsrid=181&semester=2017S&courseNr=103058")
         print(r.text)
 
 
