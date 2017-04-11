@@ -74,7 +74,8 @@ def registerCourse(courseId, session):
 
     logging.debug("parse Data " + str(values))
     session.post(url, data=data)
-
+    r = session.get(url)
+    print(r.text)
 
 def urlibTest():
     with urllib.request.urlopen('https://docs.python.org/2/howto/urllib2.html') as response:
