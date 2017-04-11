@@ -1,0 +1,18 @@
+DEBUG:root:Assembling the data
+DEBUG:root:parse Data {'totp': '', 'pw': 'Vo11ru01La10', 'name': '1619916', 'app': '77'}
+DEBUG:root:Opened the request for the url: https://iu.zid.tuwien.ac.at/AuthServ.portal with the data b'totp=&pw=Vo11ru01La10&name=1619916&app=77'
+DEBUG:requests.requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): iu.zid.tuwien.ac.at
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://iu.zid.tuwien.ac.at:443 "POST /AuthServ.portal HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:Resetting dropped connection: iu.zid.tuwien.ac.at
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://iu.zid.tuwien.ac.at:443 "GET /AuthServ.authenticate?app=77 HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): devil.zserv.tuwien.ac.at
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://devil.zserv.tuwien.ac.at:443 "GET /moodle_dev/moodle_tuwel_prod/login/index.php?sKey=f79e21308d080b754366b4fe38cdc1125ff73cad&user=14349433&host=212-88-4-79.adsl.highway.telekom.at HTTP/1.1" 503 None
+DEBUG:root:parse Data {'examDateListForm_SUBMIT': '1', 'examDateListFormj_id_43:0:j_id_8m': 'Anmelden'}
+DEBUG:requests.requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): tiss.tuwien.ac.at
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://tiss.tuwien.ac.at:443 "POST /education/course/examDateList.xhtml HTTP/1.1" 302 0
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://tiss.tuwien.ac.at:443 "GET /admin/authentifizierung?instant_login=1&url=%2Feducation%2Fcourse%2FexamDateList.xhtml HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:Resetting dropped connection: iu.zid.tuwien.ac.at
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://iu.zid.tuwien.ac.at:443 "GET /AuthServ.authenticate?app=76 HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://tiss.tuwien.ac.at:443 "GET /login?sKey=05ad495f2ddcd702c5c0bd589e1b7f2d0bbde9f5&oid=14349433 HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://tiss.tuwien.ac.at:443 "GET /main/student HTTP/1.1" 302 None
+DEBUG:requests.requests.packages.urllib3.connectionpool:https://tiss.tuwien.ac.at:443 "GET /education/course/examDateList.xhtml HTTP/1.1" 200 None

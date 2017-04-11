@@ -8,7 +8,8 @@ from configuration import Configuration
 
 def logIn():
 # ---! Data !---
-    logging.info()
+    logging.basicConfig(filename='log',level=logging.DEBUG)
+    logging.debug("Assembling the data")
     url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
     conf = Configuration()
     usn, pw = conf.getUsernamePassword('Laurenz')
@@ -32,6 +33,7 @@ def logIn():
 # ---! End Of Data !---
     data = urllib.parse.urlencode(values)
     data = data.encode('UTF-8')  # data should be bytes
+    logging.debug("parse Data " + str(values))
 # ---! urllib attempt, (including Cookiejar) !---
    # cj = http.cookiejar.CookieJar()
 #    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
@@ -54,11 +56,24 @@ def logIn():
     #r = requests.post(url, data=json.dumps(data), headers=header)
 
     with requests.Session() as session:
+        logging.debug("Opened the request for the url: " + url + " with the data " + str(data))
         session.post(url, data=data)
-        r = session.get("https://tiss.tuwien.ac.at/course/educationDetails.xhtml?dswid=8816&dsrid=181&semester=2017S&courseNr=103058")
-        print(r.text)
+        #r = session.get("https://tiss.tuwien.ac.at/course/educationDetails.xhtml?dswid=8816&dsrid=181&semester=2017S&courseNr=103058")
+        #print(r.text)
+        registerCourse("j_id_43:0:j_id_8m", session)
 
 
+def registerCourse(courseId, session):
+    url = "https://tiss.tuwien.ac.at/education/course/examDateList.xhtml"
+    values = {
+        "examDateListForm" + courseId : "Anmelden",
+        "examDateListForm_SUBMIT" : "1"
+    }
+    data = urllib.parse.urlencode(values)
+    data = data.encode('UTF-8')  # data should be bytes
+
+    logging.debug("parse Data " + str(values))
+    session.post(url, data=data)
 
 
 def urlibTest():
