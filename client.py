@@ -1,3 +1,4 @@
+import logging
 import urllib.request
 import urllib.parse
 import http.cookiejar
@@ -7,6 +8,7 @@ from configuration import Configuration
 
 def logIn():
 # ---! Data !---
+    logging.info()
     url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
     conf = Configuration()
     usn, pw = conf.getUsernamePassword('Laurenz')
