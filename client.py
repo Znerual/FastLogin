@@ -12,7 +12,7 @@ def logIn():
     logging.debug("Assembling the data")
     url = 'https://iu.zid.tuwien.ac.at/AuthServ.portal'
     conf = Configuration()
-    usn, pw = conf.getUsernamePassword('Laurenz')
+    usn, pw = conf.getUsernamePassword('Anil')
     values = {'name' : usn,
               'pw' : pw,
               'totp' : '',
@@ -58,8 +58,8 @@ def logIn():
     with requests.Session() as session:
         logging.debug("Opened the request for the url: " + url + " with the data " + str(data))
         session.post(url, data=data)
-        #r = session.get("https://tiss.tuwien.ac.at/course/educationDetails.xhtml?dswid=8816&dsrid=181&semester=2017S&courseNr=103058")
-        #print(r.text)
+        r = session.get("https://iu.zid.tuwien.ac.at/AuthServ.portal")
+        print(r.text)
         registerCourse("j_id_43:0:j_id_8m", session)
 
 
@@ -76,6 +76,27 @@ def registerCourse(courseId, session):
     session.post(url, data=data)
     r = session.get(url)
     print(r.text)
+
+    url2 = "https://tiss.tuwien.ac.at/education/course/register.xhtml"
+    values2 = {
+        "regForm:j_id_2j" : "Anmelden",
+        "regForm_SUBMIT": "1"
+    }
+    data2 = urllib.parse.urlencode(values2)
+    data2 = data2.encode('UTF-8')  # data should be bytes
+
+    logging.debug("parse Data " + str(values2))
+    session.post(url2, data=data2)
+    r2 = session.get(url2)
+    print(r2.text)
+
+'''
+regForm:j_id_2j:Anmelden
+regForm_SUBMIT:1
+javax.faces.ViewState:txSJFVo5dOyZn2VTDZIm84DdNWHA3EP29bLGxP+fcPhyZmO/
+javax.faces.ClientWindow:7120
+dspwid:7120
+'''
 
 def urlibTest():
     with urllib.request.urlopen('https://docs.python.org/2/howto/urllib2.html') as response:
